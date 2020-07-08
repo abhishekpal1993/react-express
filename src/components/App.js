@@ -21,14 +21,14 @@ const App = props => {
     );
   });
 
+  useEffect(() => {
+    console.log("App.js:: lifecycle:", "componentDidMount!");
+  }, []);
+
   console.log("App.js:: node:", node);
   console.log("App.js:: imageList:", imageList);
   console.log("App.js:: loading:", loading);
   console.log("App.js:: scroll:", scroll);
-
-  useEffect(() => {
-    console.log("App.js:: lifecycle:", "componentDidMount!");
-  }, []);
 
   return (
     <div className={["container", classes.container].join(" ")}>

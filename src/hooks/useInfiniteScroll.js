@@ -14,7 +14,7 @@ export const useInfiniteScroll = ({
   const observer = useRef(
     new window.IntersectionObserver(
       ([entry]) => {
-        console.log("useInfiniteScroll.js:: entry:", entry);
+        console.log("useInfiniteScroll.js:useRef: entry:", entry);
         if (entry.isIntersecting) {
           const response = apiCall(3);
           if (response.length) {
@@ -32,8 +32,14 @@ export const useInfiniteScroll = ({
     )
   );
 
+  // understanding useEffect componentDidMount
+  useEffect(() => {
+    console.log("useInfiniteScroll.js:useEffect:[] -> componentDidMount!");
+  }, []);
+
   // set/unset observer useEffect
   useEffect(() => {
+    console.log("useInfiniteScroll.js:useEffect:[node] -> componentDidUpdate!");
     const { current: currentObserver } = observer;
     currentObserver.disconnect();
 
@@ -41,7 +47,7 @@ export const useInfiniteScroll = ({
 
     return () => {
       console.log(
-        "useInfiniteScroll.js:: lifecycle: componentWillUnMount!",
+        "useInfiniteScroll.js:useEffect:[node] -> componentWillUnMount!",
         currentObserver
       );
       currentObserver.disconnect();
