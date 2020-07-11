@@ -34,11 +34,11 @@ module.exports = {
       },
     ],
   },
-  /* plugins: [
+  plugins: [
     new CopyPlugin({
       patterns: [{ from: 'build', to: 'build' }],
     }),
-  ], */
+  ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'server.bundle.js',

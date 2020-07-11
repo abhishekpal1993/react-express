@@ -4,7 +4,6 @@
   "description": "",
   "keywords": [],
   "private": true,
-  "type": "module",
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
@@ -32,8 +31,7 @@
     "eject": "react-scripts eject",
     "express:build": "npm run build && webpack",
     "express:serve": "node dist/server.bundle.js",
-    "express:start": "npm run express:build && npm run express:serve",
-    "express:dev": "nodemon server.js --watch server.js"
+    "express:start": "npm run express:build && npm run express:serve"
   },
   "eslintConfig": {
     "extends": "react-app"
