@@ -12,16 +12,14 @@ const logger = () => {
 
 // Express Init
 const app = express();
+
+// cors middleware
 app.use(cors());
+
 // React Static Files
-app.use(express.static(path.join('./build')));
+app.use(express.static(path.resolve('build')));
 
-// React index.html fetch
-app.get('/', (req, res) => {
-  res.sendFile(path.join('./build', 'index.html'));
-});
-
-// APIs here
+// Dummy APIs here
 const infiniteArray = [
   {
     id: 1,
@@ -176,5 +174,11 @@ app.get('/api/images', (req, res) => {
   logger()({ ...req.query, start, end });
   res.send(infiniteArray.slice(start, end));
 })
+
+
+// React index.html fetch
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve('build', 'index.html'));
+});
 
 app.listen(process.env.PORT || 8080);
