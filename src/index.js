@@ -1,16 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./components/App";
+import App from "./feature/App";
 import * as serviceWorker from "./serviceWorker";
 
 import "bootstrap/dist/css/bootstrap.css";
 
+const application = (
+  /* 
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  */
+  <App />);
+
 ReactDOM.render(
-  /* <React.StrictMode>
-    <App />
-  </React.StrictMode> */
-  <App />,
+  application,
   document.getElementById("root")
 );
 

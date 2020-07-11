@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
-import ProgressiveImage from "./ProgressiveImage/ProgressiveImage";
-import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
+import ProgressiveImage from "./components/ProgressiveImage";
+import { useInfiniteScroll } from "./hooks/useInfiniteScroll";
 
 import classes from "./App.module.css";
 

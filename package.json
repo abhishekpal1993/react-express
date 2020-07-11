@@ -4,11 +4,17 @@
   "description": "",
   "keywords": [],
   "private": true,
+  "type": "module",
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
   "devDependencies": {
@@ -26,7 +32,8 @@
     "eject": "react-scripts eject",
     "express:build": "npm run build && webpack",
     "express:serve": "node dist/server.bundle.js",
-    "express:start": "npm run express:build && npm run express:serve"
+    "express:start": "npm run express:build && npm run express:serve",
+    "express:dev": "nodemon server.js --watch server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
