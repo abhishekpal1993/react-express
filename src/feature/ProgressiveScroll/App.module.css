@@ -12,4 +12,6 @@
 
 .customDiv {
   padding: 10px;
+  /* very very important to define the min-height to keep ref out of screen */
+  min-height: 337.5px;
 }

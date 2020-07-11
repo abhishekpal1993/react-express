@@ -6,7 +6,7 @@ import { useInfiniteScroll } from "./hooks/useInfiniteScroll";
 import classes from "./App.module.css";
 
 const App = props => {
-  const [node, imageList, loading] = useInfiniteScroll({ rootMargin: "20px" });
+  const [node, imageList, loading] = useInfiniteScroll({});
 
   const scroll = imageList.map(image => {
     return (

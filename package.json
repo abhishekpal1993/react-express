@@ -31,7 +31,8 @@
     "eject": "react-scripts eject",
     "express:build": "npm run build && webpack",
     "express:serve": "node dist/server.bundle.js",
-    "express:start": "npm run express:build && npm run express:serve"
+    "express:start": "npm run express:build && npm run express:serve",
+    "express:dev": "nodemon --watch server.mjs --experimental-modules server.mjs"
   },
   "eslintConfig": {
     "extends": "react-app"
