@@ -34,86 +34,89 @@ const useBoard = () => {
   );
 
   useEffect(() => {
-    // winnerCondition :
-    // - rows have same value
-    // - columns have same value
-    // - diagonals have same value
-    const computeValues = tempCompare => {
-      const playerOne = tempCompare.every(item => item === 1);
-      const playerTwo = tempCompare.every(item => item === 2);
+    // winner if: any row/column/diagonals matched
+    const calculateWinner = tempItemsToCalculate => {
+      const playerOne = tempItemsToCalculate.every(item => item === 1);
+      const playerTwo = tempItemsToCalculate.every(item => item === 2);
 
       return playerOne ? 1 : playerTwo ? 2 : 0;
-    };
 
-    const diagonalExtract = box => {
-      let tempCompare = [];
-      let winner = 0;
-
-      for (
-        let row = 0, col = 0;
-        row < box.length && col < box.length;
-        row++, col++
-      ) {
-        tempCompare.push(box[row][col]);
-      }
-
-      winner = computeValues(tempCompare);
-      if (winner) {
-        return winner;
-      } else {
-        tempCompare = [];
-      }
-
-      for (
-        let row = 0, col = box.length - 1;
-        row < box.length && col >= 0;
-        row++, col--
-      ) {
-        tempCompare.push(box[row][col]);
-      }
-
-      return computeValues(tempCompare);
-    };
-
-    const rowExtract = box => {
-      for (let row = 0; row < box.length; row += 1) {
-        const tempCompare = [];
-        let winner = 0;
-        for (let col = 0; col < box.length; col += 1) {
-          tempCompare.push(box[row][col]);
-        }
-
-        winner = computeValues(tempCompare);
-        if (winner) {
-          return winner;
-        }
-      }
-    };
-
-    const columnExtract = box => {
-      for (let col = 0; col < box.length; col += 1) {
-        const tempCompare = [];
-        let winner = 0;
-        for (let row = 0; row < box.length; row += 1) {
-          tempCompare.push(box[row][col]);
-        }
-
-        winner = computeValues(tempCompare);
-        if (winner) {
-          return winner;
-        }
-      }
-    };
-
-    const winnerCondition = [diagonalExtract, rowExtract, columnExtract];
-    let winner = 0;
-
-    for (let i = 0; i < winnerCondition.length && !winner; i += 1) {
-      winner = winnerCondition[i](board);
     }
 
-    if (winner) {
-      setRoundWinner(winner);
+    const rowItems = currentBoard => {
+      for (let row = 0; row < currentBoard.length; row += 1) {
+        const tempItemsToCalculate = [];
+        for (let column = 0; column < currentBoard.length; column += 1) {
+          tempItemsToCalculate.push(currentBoard[row][column]);
+        }
+
+        const rowWinner = calculateWinner(tempItemsToCalculate);
+
+        if (rowWinner) {
+          return rowWinner;
+        }
+      }
+    }
+
+    const columnItems = currentBoard => {
+      for (let column = 0; column < currentBoard.length; column += 1) {
+        const tempItemsToCalculate = [];
+        for (let row = 0; row < currentBoard.length; row += 1) {
+          tempItemsToCalculate.push(currentBoard[row][column]);
+        }
+
+        const rowWinner = calculateWinner(tempItemsToCalculate);
+
+        if (rowWinner) {
+          return rowWinner;
+        }
+      }
+    }
+
+    const diagonalItemsTopLeft = currentBoard => {
+      const tempItemsToCalculate = [];
+      for (
+        let row = 0, col = 0;
+        row < currentBoard.length &&
+        col < currentBoard.length;
+        row++ , col++
+      ) {
+        tempItemsToCalculate.push(currentBoard[row][col]);
+      }
+
+      return calculateWinner(tempItemsToCalculate);
+    }
+
+    const diagonalItemsTopRight = currentBoard => {
+      const tempItemsToCalculate = [];
+      for (
+        let row = 0, col = currentBoard.length - 1;
+        row < currentBoard.length &&
+        col >= 0;
+        row++ , col--
+      ) {
+        tempItemsToCalculate.push(currentBoard[row][col]);
+      }
+
+      return calculateWinner(tempItemsToCalculate);
+    }
+
+    let winner = 0;
+    const conditions = [
+      rowItems,
+      columnItems,
+      diagonalItemsTopLeft,
+      diagonalItemsTopRight,
+    ];
+
+    for (let i = 0; i < conditions.length && !winner; i += 1) {
+      winner = conditions[i](board);
+      console.log('ROUND CALLED', winner);
+      if (winner) {
+        console.log('SET CALLED', winner);
+        setRoundWinner(winner);
+        return;
+      }
     }
   }, [board]);
 
