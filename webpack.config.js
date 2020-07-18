@@ -2,14 +2,14 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './server.mjs',
+  entry: './server/main.js',
   mode: 'production',
   target: 'node',
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.mjs$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: [
           {

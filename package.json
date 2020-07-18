@@ -25,14 +25,12 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "express:build": "npm run build && webpack",
-    "express:serve": "node dist/server.bundle.js",
-    "express:start": "npm run express:build && npm run express:serve",
-    "express:dev": "nodemon --watch server.mjs --experimental-modules server.mjs"
+    "react:start": "react-scripts start",
+    "react:build": "react-scripts build",
+    "express:start": "nodemon --watch ./server/main.mjs --experimental-modules ./server/main.mjs",
+    "express:build": "webpack",
+    "start": "node dist/server.bundle.js",
+    "build": "npm run react:build && npm run express:build"
   },
   "eslintConfig": {
     "extends": "react-app"
