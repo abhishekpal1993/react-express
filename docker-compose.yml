@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: react-playground
-    container_name: react-playground
+    image: react-express
+    container_name: react-express
     ports:
       - 8080:8080
     networks:

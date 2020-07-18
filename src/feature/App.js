@@ -21,7 +21,7 @@ const App = _props => {
       <Switch>
         <Route exact path="/">
           <div className="container">
-            <h1>Welcome to React Playground</h1>
+            <h1>Welcome to React Express</h1>
           </div>
         </Route>
         <Route exact path="/infinite-scroll" component={ProgressiveScroll} />
