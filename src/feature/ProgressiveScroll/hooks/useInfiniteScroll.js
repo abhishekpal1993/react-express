@@ -1,12 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import axios from 'axios';
-
-const dummyHttpRequest = async (limit = 1, page = 1) => {
-  const response = await axios.get(`http://localhost:8080/api/images?page=${page}&limit=${limit}`);
-  const arr = response.data;
-  console.log('dummyHttpRequest::', arr);
-  return arr;
-};
 
 export const useInfiniteScroll = ({
   root = null,
@@ -17,6 +10,14 @@ export const useInfiniteScroll = ({
   const [loading, setLoading] = useState(true);
 
   const node = useRef(null);
+
+  // fetch images
+  const getImagesRequest = useCallback(async (limit = 1, page = 1) => {
+    const response = await axios.get(`http://localhost:8080/api/images?page=${page}&limit=${limit}`);
+    const arr = response.data;
+    console.log('getImagesRequest::', arr);
+    return arr;
+  }, []);
 
   // understanding useEffect componentDidMount
   useEffect(() => {
@@ -32,9 +33,9 @@ export const useInfiniteScroll = ({
         if (entry.isIntersecting) {
           (async () => {
             const limit = 3;
-            const currentPage = imageList.length / limit;
+            const currentPage = Math.floor(imageList.length / limit);
             const getPage = currentPage + 1;
-            const response = await dummyHttpRequest(limit, getPage);
+            const response = await getImagesRequest(limit, getPage);
             if (response.length) {
               setImageList(prevList => [...prevList, ...response]);
             } else {
@@ -59,7 +60,7 @@ export const useInfiniteScroll = ({
       );
       observer.disconnect();
     };
-  }, [node, root, rootMargin, threshold, imageList]);
+  }, [node, root, rootMargin, threshold, imageList, getImagesRequest]);
 
   console.log("useInfiniteScroll.js:: node:", node);
   console.log("useInfiniteScroll.js:: loading:", loading);
