@@ -26,6 +26,7 @@ These varibles are required for database connectivity:
 ```bash
 export DB_NAME="testDb"
 export DB_HOST="postgres"
+export DB_MIGRATION_HOST="localhost"
 export DB_USER="testName"
 export DB_PASSWORD="testPass"
 ```
