@@ -1,9 +1,9 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './server/main.js',
-  mode: 'production',
   target: 'node',
   devtool: 'source-map',
   module: {
@@ -35,12 +35,21 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new CopyPlugin({
       patterns: [{ from: 'build', to: 'build' }],
     }),
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
     filename: 'server.bundle.js',
+  },
+  resolve: {
+    alias: {
+      'pg-native': 'noop2',
+      tedious: 'noop2',
+      sqlite3: 'noop2',
+      mysql2: 'noop2',
+    },
   },
 };
