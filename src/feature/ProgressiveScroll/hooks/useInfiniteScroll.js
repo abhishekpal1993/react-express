@@ -13,7 +13,7 @@ export const useInfiniteScroll = ({
 
   // fetch images
   const getImagesRequest = useCallback(async (limit = 1, page = 1) => {
-    const response = await axios.get(`http://localhost:8080/api/images?page=${page}&limit=${limit}`);
+    const response = await axios.get(`/api/images?page=${page}&limit=${limit}`);
     const arr = response.data;
     console.log('getImagesRequest::', arr);
     return arr;
